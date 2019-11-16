@@ -1,4 +1,4 @@
-const { usuarios, proximoId } = require('../data/db');
+const { usuarios, proximoId } = require('../../data/db');
 
 function indiceUsuario(filtro) {
     if (!filtro) {
@@ -30,14 +30,14 @@ module.exports = {
 
         return novo;
     },
-    alterarUsuario(_, args) {
-        const i = usuarios.findIndex(u => u.id === args.id);
+    alterarUsuario(_, { dados, filtro }) {
+        const i = indiceUsuario(filtro);
 
         if (i < 0) return null;
 
         const usuario = {
             ...usuarios[i],
-            ...args
+            ...dados
         };
         usuarios.splice(i, 1, usuario);
 
